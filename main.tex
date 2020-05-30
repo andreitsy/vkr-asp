@@ -1,0 +1,83 @@
+% ОБЯЗАТЕЛЬНО ИМЕННО ТАКОЙ documentclass!
+% (Основной кегль = 14pt, поэтому необходим extsizes)
+% Формат, разумеется, А4
+% article потому что стандарт не подразумевает разделов
+% Глава = section, Параграф = subsection
+% (понятия "глава" и "параграф" из стандарта)
+\documentclass[a4paper,article,14pt]{extarticle}
+
+% Подключаем главный пакет со всем необходимым
+\usepackage{spbudiploma}
+
+% Пакеты по желанию (самые распространенные)
+% Хитрые мат. символы
+\usepackage{euscript}
+% Таблицы
+\usepackage{longtable}
+\usepackage{makecell}
+% Картинки
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amsthm,amssymb, amsmath}
+\usepackage{textcomp}
+
+
+\begin{document}
+
+% Титульник в файле titlepage.tex
+\input{titlepage.tex}
+
+% Содержание
+\tableofcontents
+\pagebreak
+
+\specialsection{Введение}
+
+
+\specialsection{Постановка задачи}
+
+
+\specialsection{Обзор литературы}
+
+
+\section{Пред. введение}
+\subsection{Мотивация}
+
+
+\subsection{Постановка задачи}
+
+
+\subsection{Доступные программные средства}
+
+
+
+
+\subsection{Полученные результаты} 
+
+
+\section{Основная часть раз}
+
+
+\pagebreak
+\section{Основная часть два: Теория}
+
+\section{Основная часть два: Детали реализации}
+\subsection{Расчётная часть}
+
+\section{Анализ экспериментов.}
+
+
+\specialsection{Выводы}
+
+
+\pagebreak
+
+\specialsection{Заключение}
+
+
+% Библиография в cpsconf стиле
+% Аргумент {1} ниже включает переопределенный стиль с выравниванием слева
+\begin{thebibliography}{1}
+\bibitem{voc} Griffin D.W., Lim J.S. \flqq Multiband excitation vocoder\frqq. IEEE ASSP-36 (8), 1988, pp. 1223-1235.
+\end{thebibliography}
+\end{document}
