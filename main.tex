@@ -11,6 +11,7 @@
 
 % Пакеты по желанию (самые распространенные)
 % Хитрые мат. символы
+
 \usepackage{euscript}
 % Таблицы
 \usepackage{longtable}
@@ -18,9 +19,12 @@
 % Картинки
 \usepackage[pdftex]{graphicx}
 
-\usepackage{amsthm,amssymb, amsmath}
+\usepackage{amsthm, amssymb, amsmath, amsfonts, physics}
+\usepackage{mathtext,cite,enumerate,float}
 \usepackage{textcomp}
 
+\DeclareMathOperator{\Rot}{rot}
+\DeclareMathOperator{\Div}{div}
 
 \begin{document}
 
@@ -32,39 +36,587 @@
 \pagebreak
 
 \specialsection{Введение}
+В физике конденсированного вещества большую роль играет исследование различных существенно нелинейных явлений и эффектов. Такие эффекты встречаются почти везде, однако зачастую, при анализе подобных явлений, сталкиваются со сложными уравнениями, решения которых практически никогда нельзя получить аналитически. Особую роль в анализе нелинейных явлений играет топология --- раздел математики, изучающий свойства математических объектов, сохраняющихся при непрерывных преобразованиях. Например, теория Черна — Саймонса описывает топологический порядок в состояниях дробного квантового эффекта Холла. \cite{chern-simons}. Другим примером является так называемые топологические индексы солитонов - некоторые стабильные решения полевых уравнений, сохраняющие свою форму - в разных моделях квантовой теории поля. \cite{rajaraman}. Для описания различных конфигураций системы вводится классификация по топологическим индексам, обладающих тем свойством, что система не может быть трансформирована непрерывном образом из состояния с одним значением индекса в состояние с другим. Во всём этом многообразии выделяются явления, возникающие в теории магнитоупорядоченных сред, где существует весьма обширный «зоопарк» таких экзотических явлений. Особый же интерес, в данной работе, представляет исследование скирмионов, некоторых хиральных магнитных вихрей в тонких слоях магнитных материалов, существование которых предсказывались в соединениях структурного типа B20.\cite{paper:roslerBogdanov}
 
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\paperwidth]{images/skyrmionPic.png}
+	\caption{Скирмион на гексагональной ячейке}
+	\label{pic:skyrmion}
+\end{figure}
 
 \specialsection{Постановка задачи}
 
+TODO!
+
+В рамках данной работы численно вычисляется спектр магнонов на решетке скирмионов. Сначала применяется метод ВКБ для одного скирмиона на диске с оптимальным радиусом, минимизирующим классическую энергию системы, которая определяется изотропным гейзеберговским обменным гамильтонианом с учетом взаимодействия Дзялошинского-Мория и внешнего магнитного поля. Квантовые спины описываются в рамках бозонного представления Малеева-Дайсона. С помощью него воспроизводится скирмионное решение, и получается набор бозонных слагаемых. Линейные по бозонам члены отсутствуют, что соответствует равновесному положению вакуума, а квадратичные дают спектр магнонов. В результате получается уравнение на волновую функцию магнона, после этого оно решается численно и рассчитывается спектр и волновые функции. Затем, используя метод, аналогичный методу сильной связи для металлов \cite{book:abrikosov}, рассматривается дисперсия нижних уровней энергии на гексагональной решетке скирмионов.
 
 \specialsection{Обзор литературы}
 
-
-\section{Пред. введение}
-\subsection{Мотивация}
+Одни из первых экспериментов, в которых наблюдалась скирмионная решетка, были проведены относительно недавно. \cite{paper:muhlbauer, paper:yu} Они подстегнули интерес исследователей к этой теме как со стороны теоретиков, так и со стороны экспериментаторов. На сегодняшний день удалось найти немало материалов, в которых обнаружили скирмионную решетку, например, металлы $\mathrm{Mn\,Si}$ и $\mathrm{Fe\,Ge}$, полупроводник $\mathrm{Fe_{1-x}\,Co_x\,Si}$ \cite{paper:munzer} и изолятор $\mathrm{Cu_2\,O\, Se\, O_3}$. Эти вещества обладают различными электронными характеристиками, но одинаковыми магнитными свойствами. \cite{paper:nagaosa}
 
 
-\subsection{Постановка задачи}
+Скирмионы интересны не только в фундаментальном аспекте, но и с точки зрения различных технических приложений, например, с ними связывают надежды на создание сверхплотных, долговременных носителей информации \cite{paper:kiselevBogdanov, paper:fert} или транзисторов \cite{paper:zhang}. От них ожидают сильного воздействия на спиновый ток. Электрон, движущийся сквозь скирмион, несколько раз меняет спиновую ориентацию, подстраивая ее под локальное распределение намагниченности, в результате чего на него действует эффективная сила, изменяющая направление его движения, что макроскопически должно проявляться как разновидность эффекта Холла.\cite{rosch_pfleiderer}
 
 
-\subsection{Доступные программные средства}
+Одно из первых предсказаний существования скирмионов в магнетиках было сделано в работах \cite{paper:bogdanov, paper:roslerBogdanov}, ими же была проанализирована стабильность конфигурации скирмиона на диске в классическом случае. Здесь стоит заметить, что до недавнего времени большинство теоретических работ на эту тему ограничивались лишь классическим рассмотрением динамики скирмионов. Недавно (\cite{aristov, garst}) был применен метод квазиклассического квантования и проведен анализ спектра магнонов в такой конфигурации. Однако там анализируется конфигурация с одним скирмионном на плоскости и не рассматривается случай решетки. Еще можно упомянуть работы \cite{paper:zaspel, paper:ivanov, paper:baryakhtar}, где исследуются подобные скирмионам вихревые структуры путем анализа уравнений Ландау-Лифшица.
+
+
+\section{Вывод основного гамильтониана для одного скирмиона и построение классического решения}
+\subsection{Базовый гамильтониан для двумерного хирального магнетика}
+
+Традиционно магнетики могут быть рассмотрены в рамках макроскопической теории, которая вытекает из соответствующей микроскопической теории, являющейся в свою очередь следствием законов релятивисткой квантовой теории и может быть получена путем рассмотрения квантово-механического принципа неразличимости тождественных частиц, если рассматривать волновую функцию магнетика целиком. Энергия кристалла при этом рассматривается как сумма кулоновских энергий отдельных атомов образующих периодическую решетку, однако принцип Ферми накладывает определенные требования на волновую функцию и ведет к тому, что полная энергия кристалла начинает зависит от спиновых моментов отдельных атомов.  Вследствие этого конечная энергия с определенной долей точности может быть получена добавлением к исходному микроскопическому гамильтониану эффективной энергии, зависящей от спиновых механических моментов $\widehat{S}_i^\alpha = S^\alpha (\mathbf{r}_i)$ отдельных атомов на решетке. При этом латинский индекс здесь(и далее по тексту) отвечает пространственным переменным, а греческий - спиновым и будем считать, что $\widehat {\mathbf{S}}_{i}$ обозначает вектор в спиновом пространстве с компонентами $\widehat{S}_i^1,\widehat{S}_i^2,\widehat{S}_i^3$. При этом подразумевается, что операторы $\widehat{S}$ удовлетворяют комутационным соотношениям $[\widehat{S}_i^\alpha, \widehat{S}_j^\beta]=i \delta(\mathbf{r}_i - \mathbf{r}_j) \epsilon_{\alpha \beta \gamma} \widehat{S}_i^\gamma $. Используя эти операторы и введя так называемые обменные функции $J(\mathbf{r}_i - \mathbf{r}_j)$, мы можем записать обменную энергию для двух атомов как $J\left(\mathbf{r}_i - \mathbf{r}_j \right){{\widehat {\mathbf{S}}}_i}{{\widehat {\mathbf{S}}}_j}$, при этом будем подразумевать, что функция $J(\mathbf{r})=J(r)\simeq e^{-r}$, поскольку обменное слагаемое должно определяться степенью прекрытия волновых функций.
+
+Кроме обменного слагаемого мы учтем и другие вклады в энергию, рассмотрим двумерную магнитную систему без центра инверсии: будем учитывать взаимодействие Дзялошинского-Мория, которое может быть представлено в ввиде для пары ячеек: ${H_{DM}} = {{\mathbf{D}}_{ij}} \cdot \left( {\widehat {\mathbf{S}}}_{i} \times {{\widehat {\mathbf{S}}}_j} \right) $ \cite{paper:lacrox}
+с вектором $\mathbf{D}_{ij} = D \left(\mathbf{r}_i - \mathbf{r}_j \right)$ лежащим в плоскости, и внешнее магнитное поле $\mathbf{H_0}$ направленное перпендикулярно к плоскости. В иных работах дополнительно учитывают еще анизотропию типа "легкая ось", \cite{paper:bogdanov}, но мы не будем включать ее в рассмотрение, поскольку общая картина не изменяется существенно после добавления этого слагаемого. Как будет показано в работе, подбирая параметры модели с учетом лишь упомянутых выше слагаемых, мы можем получить стабильную конфигурацию скирмионного кристала с энергией меньшей чем однородное состояние или даже состояние со спиральной решеткой. Полный гамильтониан микроскопической теории принимает следующий вид:
+
+\begin{equation}
+\label{eq:ham}	
+H = \sum\limits_{i,j} {\left[ {J\left( {{{\mathbf{r}}_i} - {{\mathbf{r}}_j}} \right){{\widehat {\mathbf{S}}}_i}{{\widehat {\mathbf{S}}}_j} + {{\mathbf{D}}_{ij}}  {{\widehat {\mathbf{S}}}_i} \times {{\widehat {\mathbf{S}}}_j}} \right] - {\mathbf{H_0}}} \sum\limits_{i} {{{\widehat {\mathbf{S}}}_i}}
+\end{equation}
+
+
+\subsection{Описание сверхрешетки скирмионов}
+Ожидается, что скирмионы в магнетике образуют гексагональную решетку в одной из плоскостей \cite{paper:muhlbauer, paper:yu} и известно, что трехмерные сруктуры типа B20 (например $\mathrm{Mn\,Si}$ или $\mathrm{Fe_{1-x}\,Co_x\,Si}$) можно представить как "многослойку" подобных двумерных решеток. Будем рассматривать 2D случая изначально и для описания подобной решетки удобно использовать следующее приближение: предполагается аппроксимировать гексагональную ячейку - правильный шестиугольник - диском равной площади $S_{sk}$ (рис. \ref{pic:approxHexagone}). Это позволяет избежать в дальнешем сложностей, связанных с рассмотрением границы и использовать полярные координаты для описания конфигурации в рамках одного скирмиона, при этом различие между реальной гексагональной границей и диском не должно сильно влиять на суммарную энергию, поскольку все вектора локальной намагниченности практически колинеарны "на краю" скирмиона.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\paperwidth]{images/approx.png}
+\caption{Заменим гексагональную ячейку диском, и на нем рассмотрим один скирмион}
+\label{pic:approxHexagone}
+\end{figure}
+
+При этом мы будем выбирать такой радиус $R_0$, чтобы энергия образца с решеткой была минимальна \cite{paper:bogdanov, paper:nagaosaHan}. Поскольку она получается суммированием энергий отдельных скирмионов, то для этого достаточно минимизировать плотность энергии $\rho_{c} = E_{sk}/S_{sk}$ одного скирмиона на диске.
 
 
 
+\subsection{Вывод уравнения на спектр спиновых волн из решеточной модели}
+Аналогично как в \cite{paper:aristov} получим спектральное уравнение на магноны. Введем тензорные обозначения, считая что латинские индексы относятся к спиновым координатам ($a,b,c,d = 1,2,3$), а греческие к пространственным ($\alpha, \beta, \gamma = 1,2$). Тогда, меняя порядок суммирования и вводя вектор $\mathbf{n}=\mathbf{r}_i - \mathbf{r}_j$, переобозначая $\mathbf{r}_i \equiv \mathbf{r}$, получаем из (\ref{eq:ham}) гамильтониан в таком виде
 
-\subsection{Полученные результаты} 
+\begin{equation}
+\label{eq:mainHam}
+\sum\limits_{{\mathbf{r}},{\mathbf{n}}} {\left\{ {S_{\mathbf{r}}^a\left( {J\left( {\mathbf{n}} \right){\delta _{ab}} + D{\varepsilon _{abc}}{\delta _{\alpha c}}{n^\alpha }} \right)S_{{\mathbf{r}} - {\mathbf{n}}}^b} \right\}}  - sB\sum\limits_{\mathbf{r}} {S_{\mathbf{r}}^a{\delta _{a3}}}
+\end{equation}
+Здесь мы ввели антисимметричный тензор $\varepsilon_{abc}$ ($\varepsilon_{123} = 1$) и магнитное поле $B$, в единицах $s$. Заметим, что взаимодействие Дзялошинского-Мория смешивает спиновые и пространственные индексы - это известное свойство спин-орбитального взаимодействия.
+
+Положим теперь, что основное состояние - это скирмион $Q=-1$, и перепишем гамильтониан в таком локальном базисе, что средняя намагниченность направленна вдоль оси $z$.
+Переход к такому базису ${\mathbf{S}}_{\mathbf{r}} = \hat U\left( \mathbf{r} \right)\tilde { \mathbf{S}}_{\mathbf{r}}$ осуществляется с помошью матрицы $\hat U(\mathbf{r}) = e^{-\alpha \sigma_3}e^{-\beta \sigma_2}e^{-\gamma \sigma_3}$, с соответствующими генераторами $\sigma_2$,$\sigma_3$ группы $SO(3)$ и углами Эйлера $\alpha$, $\beta$, $\gamma$. Угол $\gamma$ не определяется из уравнения на классическую конфигурацию и может быть выбран исходя из соображений того (как показано в \cite{paper:aristov}), требуем ли мы непрерывность матрицы $U$ в нуле ($\gamma = -\alpha$) или на границе круга ($\gamma = \alpha$).
+
+Теперь проведем градиентное разложение оператора $S$. Будем считать, что $|\mathbf{n}|=n$ мало. Тогда можно воспользоваться разложением, $${S}_{{\mathbf{r}} - {\mathbf{n}}}^b = {S}_{\mathbf{r}}^b - {n^\beta }{\nabla ^\beta }{S}_{\mathbf{r}}^b + \frac{1}{2}{n^\beta }{n^\gamma }{\nabla ^\beta }{\nabla ^\gamma }{S}_{\mathbf{r}}^b$$ где слагаемые с градиентами имеют следующий вид в новом базисе:
+
+\[{\nabla ^\beta }S_{\mathbf{r}}^b = {\nabla ^\beta }\left( {{U^{bd}}{{\tilde S}^d}_{\mathbf{r}}} \right) = \left( {{\nabla ^\beta }{U^{bd}}} \right){{\tilde S}^d}_{\mathbf{r}} + {U^{bd}}\left( {{\nabla ^\beta }{{\tilde S}^d}_{\mathbf{r}}} \right)\]
+
+	
+\[{\nabla ^\beta }{\nabla ^\gamma }S_{\mathbf{r}}^b = \left( {{\nabla ^\beta }{\nabla ^\gamma }{U^{bd}}} \right){\tilde S^d}_{\mathbf{r}} + 2\left( {{\nabla ^\beta }{U^{bd}}} \right)\left( {{\nabla ^\gamma }\tilde S_{\mathbf{r}}^d} \right) + {U^{bd}}\left( {{\nabla ^\beta }{\nabla ^\gamma }{{\tilde S}^d}_{\mathbf{r}}} \right)\]
+Теперь удобно определить два тензора
+
+\begin{eqnarray}
+\label{eq:chi}
+\begin{gathered}
+  \chi _{1,\alpha }^{ab} = {U^{ca}}{\nabla ^\alpha }{U^{cb}}, \hfill \\
+  \chi _{2,\alpha \beta }^{ab} = {U^{ca}}\left( {{\nabla ^\alpha }{\nabla ^\beta }{U^{cb}}} \right) \hfill \\ 
+\end{gathered}
+\end{eqnarray}
+Явные выражениями для матриц $U(\mathbf{r})$ и $\chi_1(\mathbf{r})$, $\chi_2(\mathbf{r})$ известны \cite{paper:aristov}.
+
+В длинноволновом приближении (${\mathbf{qn}} \ll 1$), тогда 
+\[J({\mathbf{q}}) = \sum\limits_{\mathbf{n}} {{e^{i{\mathbf{qn}}}}J({\mathbf{n}})}  \simeq J(0) + \frac{C}{2}{q^2}\]
+посчитаем теперь внутренние суммы по $\mathbf{n}$. Для обменного слагаемого:
+
+\begin{eqnarray}
+\label{eq:integrExch}
+\begin{gathered}
+  \sum\limits_{\mathbf{n}} {{n^\alpha }J({\mathbf{n}})}  = 0 \hfill \\
+  \sum\limits_{\mathbf{n}} {{n^\alpha }{n^\beta }J({\mathbf{n}})}  =  - C{\left. {\frac{{{d^2}J({\mathbf{q}})}}{{d{q^\alpha }d{q^\beta }}}} \right|_{q = 0}} = - C{\delta _{\alpha \beta }} \hfill \\ 
+\end{gathered}
+\end{eqnarray}
+Для вклада от взаимодействия Дзялошинского-Мория:
+
+\begin{eqnarray}
+\label{eq:integrDM}
+\begin{gathered}
+  D\sum\limits_{\mathbf{n}} {{\varepsilon _{abc}}{\delta _{\alpha c}}{n^\alpha }}  = 0 \hfill \\
+  D\sum\limits_{\mathbf{n}} {{\varepsilon _{abc}}{\delta _{\alpha c}}{n^\alpha }{n^\beta }}  = D{\varepsilon _{abc}}{\delta _{\beta c}} \hfill \\ 
+\end{gathered}
+\end{eqnarray}
+Используя (\ref{eq:chi}),(\ref{eq:integrExch}) и (\ref{eq:integrDM}) получаем из (\ref{eq:mainHam}) гамильтониан в такой форме
+\begin{equation}
+\label{eq:hamlitNewBasis}
+H \approx {H_{ex}} + {H_{DM}} + {H_B}
+\end{equation}
+где $H_{ex}$ вклад от обменного взаимодействия,
+\[{H_{ex}} =  - \frac{1}{2}C\sum\limits_{\mathbf{r}} {\tilde S_{\mathbf{r}}^a\left( {\chi _{2,\beta \beta }^{ab} + 2\chi _{1,\beta }^{ab}{\nabla ^\beta } + {\delta _{ab}} \nabla ^ 2 } \right)\tilde S_{\mathbf{r}}^b} \]
+$H_{DM}$ от Дзялошинского-Мория
+\[{H_{DM}} =  - D\sum\limits_{\mathbf{r}} {\tilde S_{\mathbf{r}}^a{\varepsilon _{adc}}{\delta _{e\alpha }}{U^{ec}}\left( {\chi _{1,\alpha }^{db} + {\delta _{db}}{\nabla ^\alpha }} \right)\tilde S_{\mathbf{r}}^b} \]
+и $H_B$ от внешнего магнитного поля 
+\[{H_B} =  - sB\sum\limits_{\mathbf{r}} {{U^{3a}}\tilde S_{\mathbf{r}}^a} \]
+Воспользуемся представлением Малеева-Дайсона для спиновых операторов, сохраняющее коммутационные соотношения  ($[\tilde{S}^a,\tilde{S}^b] = i \epsilon_{abc}\tilde{S}^c$):
+\begin{equation} 
+\begin{aligned} 
+\label{eq:boz}
+     \tilde{S}^{z}_{j} &=s-a^+_{ j} a_{ j} \,, \quad   
+       \tilde{S}^{+}_{j}=\sqrt{2s}a_{ j}  \\
+     \tilde{S}^{-}_{j} &=\sqrt{2s}\left( a^{+}_{ j} - \frac{1}{2s}a^+_{ j}a^{+}_{ j}a_{ j} \right)
+  \end{aligned}  
+ \end{equation} 
+здесь $s$ величина спина,  $\tilde S^{\pm} = \tilde S^{x} \pm i \tilde S^{y}$ и $[a_{ j},a^+_{ j}] = 1$.  
+С помощью (\ref{eq:boz}) мы получаем из (\ref{eq:hamlitNewBasis}) гамильтониан разложенный по степеням $s$, где слагаемое при $s^2$
+\[{H_c} = \int {d\mathbf{r} \left( {-J\left( 0 \right) + \frac{1}{2}{\text{C}}\left( {\frac{{{{\sin }^2}\beta }}{{2{r^2}}} + {{\left( {\frac{{d\beta }}{{dr}}} \right)}^2}} \right){\text{ + D}}\left( {\frac{{\sin 2\beta }}{{2r}} + \frac{{d\beta }}{{dr}}} \right) - B\cos \beta } \right)} \]
+Используя уравнение на $\beta$, несложно убедиться (с помощью интегрирования по частям), что слагаемые при степени $s^{3/2}$ сокращаются - это соответствует тому, что в качестве основного состояния взято скирмионное, отвечающее локальному минимуму полной энергии (\ref{eq:ham}). 
+
+И, наконец, в порядке по $s$, можно выписать квадратичное по операторам рождения и уничтожения слагаемое в $r$-представлении:
+
+\begin{equation}
+\label{eq:HamQuantBose}
+{H_q} = \frac{1}{2}\int {d\mathbf{r} \left( {2a_{\mathbf{r}}^\dag \hat F\left( {\mathbf{r}} \right){a_{\mathbf{r}}} + a_{\mathbf{r}}^\dag G^*\left( {\mathbf{r}} \right)a_{\mathbf{r}}^\dag  + {a_{\mathbf{r}}}{G}\left( {\mathbf{r}} \right){a_{\mathbf{r}}}} \right)}
+\end{equation}
+
+\[\begin{gathered}
+  F({L_z}) \equiv C\left( { - \nabla ^ 2  + \frac{{1 + 3\cos 2\beta }}{{4{r^2}}} - \frac{{2\cos \beta }}{{{r^2}}}{{\text{L}}_{\text{z}}} - \frac{1}{2}{{\left( {\frac{{d\beta }}{{dr}}} \right)}^2}} \right) \hfill \\
+  \,\,\,\,\,\,\,\,\,\,\,\,\,\, + D\left( { - \frac{{3\sin 2\beta }}{{2r}} + \frac{{2\sin \beta }}{r}{{\text{L}}_{\text{z}}} - \frac{{d\beta }}{{dr}}} \right) + B\cos \beta  \hfill \\ 
+\end{gathered} \]
+
+\[G \equiv \frac{C}{2}\left( { - \frac{{{{\sin }^2}\beta }}{{{r^2}}} + {{\left( {\frac{{d\beta }}{{dr}}} \right)}^2}} \right) + {\text{D}}\left( {\frac{{d\beta }}{{dr}} - \frac{{\sin 2\beta }}{{2r}}} \right)\]
+где определены операторы ${{\text{L}}_{\text{z}}} \equiv  - i\frac{\partial }{{\partial \varphi }}$
+и 
+$\nabla ^ 2  \equiv \frac{1}{r}\frac{\partial }{{\partial r}}\left( {r\frac{\partial }{{\partial r}}} \right) - \frac{{{\text{L}}_z^2}}{{{r^2}}}$ 
 
 
-\section{Основная часть раз}
+\subsection{Уравнение на минимум энергии классической конфигурации и оптимальный радиус диска}
+Сначала рассмотрим скирмион в классическом случае, введя локальную намагниченность $\mathbf{m}(\mathbf{r})$ и полагая что $\mathbf{m}^2(\mathbf{r}) \equiv s^2 = const$ в любой точке на диске (возьмем для удобства единицы измерения магнитной индукции такие, что $s=1$), можно вывести из (\ref{eq:ham}) выражение для классической энергии,
+
+\begin{equation}
+\label{eq:en_class}
+{E_{sk}} = \int {d{\mathbf{r}}} \left( {C \, {{\left( {\nabla {\bf{m}}} \right)}^2} + D \, {\bf{m}}\left[ {\nabla \times {\bf{m}}} \right] - \textbf{B} \cdot {\bf{m}}} \right)
+\end{equation}
+где $C$ - это константа спиновой жесткости, а $D$ - константа Дзялошинского-Мория, магнитное поле $\textbf{B}$ перпендикулярно плоскости. Удобно перейти в полярные координаты и параметризовать $\mathbf{m}$ двумя углами.
+
+\begin{equation}
+\label{eq:parametr}
+{\mathbf{m}} = \left( {\begin{array}{*{20}{c}}
+{\cos \alpha \sin \beta }\\
+{\sin \alpha \sin \beta }\\
+{\cos \beta }
+\end{array}} \right)
+\end{equation}
+Кроме того, введем безразмерные единицы измерения, такие что мера энергии $[E]=C$, а длины $[r]=C/D$. Благодаря тому, что обменное слагаемое масштабно инвариантно в двумерном случае, остается один безразмерный параметр $b=BC/D^2$, который пропорционален амплитуде внешнего магнитного поля $B=|\mathbf{B}|$. Легко убедиться тогда, что вклад от обменного взаимодействия в подынтегральном выражении в энергию принимает вид:
+
+\begin{equation}
+\label{eq:ExchClass}
+ {\left( {\nabla {\bf{m}}} \right)^2} = {\left( {\frac{{\partial \beta }}{{\partial r}}} \right)^2} + \frac{1}{{{r^2}}}{\left( {\frac{{\partial \beta }}{{\partial \varphi }}} \right)^2} + {\sin ^2}\beta \left( {{{\left( {\frac{{\partial \alpha }}{{\partial r}}} \right)}^2} + \frac{1}{{{r^2}}}{{\left( {\frac{{\partial \alpha }}{{\partial \varphi }}} \right)}^2}} \right)
+\end{equation}
+от Дзялошинского-Мория:
+
+\begin{equation}
+\label{eq:DMclass}
+\begin{gathered}
+  {\mathbf{m}} \cdot \left[ {\nabla  \times {\mathbf{m}}} \right] = \left( {\frac{{\partial \alpha }}{{\partial r}}\cos \left( {\alpha  - \varphi } \right) + \frac{1}{r}\frac{{\partial \alpha }}{{\partial \varphi }}\sin \left( {\alpha  - \varphi } \right)} \right)\sin \beta \cos \beta  \hfill \\
+  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, + \frac{{\partial \beta }}{{\partial r}}\sin \left( {\alpha  - \varphi } \right) - \frac{1}{r}\frac{{\partial \beta }}{{\partial \varphi }}\cos \left( {\alpha  - \varphi } \right) \hfill \\ 
+\end{gathered}
+\end{equation}
+и, наконец, от магнитного поля
+
+\begin{equation}
+\label{eq:ExtClass}
+{\mathbf{B}} \cdot {\bf{m}} =  b\cos \, \beta 
+\end{equation}
+Собирая вклады, мы можем получить общее выражение для классического гамильтониана в полярных координатах. Чтобы получить уравнение на скирмионную конфигурацию, необходимо задать граничные условия на функции $\alpha$ и $\beta$. Для этого нужно обратиться к топологическим свойствам отображений сферы на сферу.
+
+\subsection{Топологический заряд}
+
+Из \cite{book:rajaraman} известно, что отображения вида $S^2 \rightarrow S^2$ могут быть подразделены на гомотопические секторы. Причем множество таких секторов, или классов, счетно и может быть охарактеризовано набором целых чисел $Q$. Это число, выделяющее ту или иную конфигурацию, называют топологическим зарядом. В нашем случае, $Q$ определяет число обходов внутренней сферы при вращении координатного пространства $R^2$, сжатого до $S^2$ за счет условия нормировки.
+
+Таким образом, закрученная структура скирмиона определяется топологическим зарядом \cite{book:rajaraman}:
+
+\begin{equation}
+\label{eq:topCharge}
+Q \equiv \frac{1}{{4\pi }}\int {d{\mathbf{r}}\left( {{\mathbf{m}}\left[ {\frac{{\partial {\mathbf{m}}}}{{\partial x}} \times \frac{{\partial {\mathbf{m}}}}{{\partial y}}} \right]} \right)}
+\end{equation}
+Если воспользоваться (\ref{eq:parametr}) и положить $\alpha = \alpha(\phi)$ и $\beta = \beta (r)$, то, считая скирмион заданным на диске радиуса $R_0$,  выражение (\ref{eq:topCharge}) преобразуется к
+
+\[\left. {Q = \frac{1}{{4\pi }}\int\limits_0^{{R_0}} {dr\int\limits_0^{2\pi } {d\varphi } } \frac{{d\alpha }}{{d\varphi }}\frac{{d\beta }}{{dr}}\sin \beta  =  - \frac{1}{{2\pi }}\alpha \left( \varphi  \right)} \right|_{\varphi  = 0}^{\varphi  = 2\pi }\left. {\frac{1}{2}\cos \beta \left( r \right)} \right|_{r = 0}^{r = {R_0}}\]
+Отсюда можно заключить, что для задания нетривиальной топологической конфигурации ($Q \neq0$) можно взять следующие граничные условия:
+
+\begin{equation}
+\label{eq:edgeCond}
+{\left\{ {\begin{array}{*{20}{c}}
+  {\alpha \left( \varphi  \right) = {W_0}\varphi  + {\gamma _0}} \\ 
+  {\beta (0) = \pi } \\ 
+  {\beta ({R_0}) = 0} 
+\end{array}} \right.}
+\end{equation}
+Здесь $W_0$ это целое число, а $\gamma _0$ произвольно. При таких условиях мы получаем $Q=-W_0$. Известно, что энергия скирмиона тем выше, чем больше $|Q|$ \cite{book:rajaraman}, поэтому будем рассматривать конфигурации с $Q=\pm 1$. В данной работе анализируется "baby skyrmion" с $Q=-1$, и следовательно $W_0 = 1$.
+
+В отсутствии стабилизирующих взаимодействий, энергия не зависит от $\gamma_0$. В нашем случае это не так. В самом деле, используя (\ref{eq:DMclass}) и (\ref{eq:edgeCond}) получаем
+
+\[D \, {\mathbf{m}} \cdot \left[ {\nabla  \times {\mathbf{m}}} \right] = D \, \sin \left( {\left( {{W_0} - 1} \right) \varphi  + {\gamma _0}} \right)\,\left( {\frac{{d\beta }}{{dr}} + {W_0}\frac{{\sin 2\beta }}{{2r}}} \right)\]
+Мы хотим минимизировать общую энергию, значит интеграл от этого слагаемого должен быть отрицательным. Поскольку $\int {d{r}} \left( {\frac{{d\beta }}{{dr}} + {W_0}\frac{{\sin 2\beta }}{{2r}}} \right) < 0$ для скирмионной конфигурации  при $W_0=1$, то множитель перед интегралом должен быть положительным, кроме того, этот вклад в энергию будет максимальным при $\gamma_0 = \pi/2$ если $D>0$. В этом выражении восстановлена константа $D$, чтобы показать, что направление закрутки скирмиона $\gamma_0 = \pm \pi/2$ определяется знаком $D$.
+
+\pagebreak
+\section{ Уравнение на спектр спиновых волн в базисе функций Ландау }
+
+\subsection{ Добавление калибровочного потенциала }
+
+Гамильтониан (\ref{eq:HamQuantBose}) удобно представить в следующем матричном ввиде:
+\begin{equation}
+\hat {\cal H}_{q} =\begin{pmatrix} F(\hat  L_{z}) &G \\ G & F(  - \hat  L_{z} ) \end{pmatrix}
+\end{equation}
+с 
+$$
+\begin{aligned} 
+F  (\hat  L_{z} )&=    - \nabla^{2}  + \frac{1 + 3\cos 2\beta }{4r^2} - \frac{2\cos \beta }{r^2}\hat{L}_{z} - \frac{1}{2}\left( \frac{d\beta }{dr} \right)^2  \\
+& +  \left\{  - \frac{3\sin 2\beta }{2r} + \frac{2\sin \beta }{r}\hat{L}_{z}  - \frac{d\beta }{dr} \right\} + b\cos \beta   \\ 
+G &= \frac{1}{2}\left(  - \frac{\sin ^2\beta }{r^2} + \left( \frac{d\beta }{dr} \right)^2 \right) 
++ \left\{ \frac{d\beta }{dr} - \frac{\sin 2\beta }{2r} \right\}
+\end{aligned}  
+$$
+
+
+Данное выражение было выведено для одного скирмиона, расположенного в начале координат и считая что скирмион расположен на диске. Однако мы можем предположить, что полный гамильтониан может быть аппроксимирован на всю плоскость целиком на решетку, если считать, что оператор потенциальной энергии можно продолжить периодическим образом на всю плоскость, чтобы проиллюстрировать эту идею, удобно ввести калибровочный потенциал:
+
+
+\begin{equation}
+(- i \nabla - \mathbf{A} ) ^ 2 = - \nabla ^ 2 + 2 i \mathbf{A} \cdot \nabla + i \text{div} \mathbf{A}  + \mathbf{A}^2
+\end{equation}
+
+$$
+\mathbf{A} = A(r) \mathbf{e}_\phi ,  \qquad  \hat{L}_{z} = - i r \nabla_\phi
+$$
+при этом $A(r) = \frac{ \cos\beta } { r } - \sin \beta$ и кроме того плотность потока для данного поля может быть легко вычислена:
+$$
+{\cal B}  = \frac 1 r \nabla_r \left(r A \right) = 
+% - \frac 1 r \left( \left( \sin \beta + r \cos \beta \right) \beta' + \sin \beta \right)
+r^{-1}  \nabla_r \left(\cos\beta   -  r  \sin \beta \right)  
+$$
+
+Тогда гамильтониан принимает следующий вид:
+\begin{equation}
+\hat {\cal H}_{r} =\begin{pmatrix} (- i \nabla - \mathbf{A} ) ^ 2 + h_1 & g \\ g & ( i \nabla - \mathbf{A} ) ^ 2 + h_1 \end{pmatrix}
+\end{equation}
+где $ h_2 \equiv G , h_1 \equiv U$
+
+Если мы рассмотрим калибровочное преобразование 
+$$
+\mathbf{A} \rightarrow \mathbf{A} + \nabla f(\mathbf{r})
+$$
+$$
+\psi \rightarrow \psi e ^ {- i f(\mathbf{r})}
+$$
+с  $f = C \varphi$, считая $C \in \mathbb{R}$, то мы получаем выражение для потенциала в следующем виде:
+$$
+\mathbf{A'}= \left(\frac {C + \cos{\beta}} {r} - \sin{\beta} \right) \mathbf{e}_\varphi
+$$
+we also change wave functions to:
+$$
+\psi' = \psi e^{-i C \varphi} 
+$$
+We've got following equation:
+$$
+\hat {\cal H}_{r} \vec{\Psi} = \tau_z E \vec{\Psi}
+$$
+$$
+\hat {\cal H}_{r} =\begin{pmatrix} (- i \nabla - \mathbf{A} ) ^ 2 + h_1 (r) &  g (r) e^{2 i C \varphi} \\  g (r) e^{-2 i C \varphi}   & ( i \nabla - \mathbf{A} ) ^ 2 + h_1 (r) \end{pmatrix}, \vec{\Psi} = \begin{pmatrix}  \psi_1 \\ \psi_2 \end{pmatrix}
+$$
+
+Also we should notice that it is useful to take $C=1$, so $A^2 \approx O((\pi - r)^2)$ for $r\rightarrow 0$.
+
+We have obtain the generilized eingenvalue problem:
+
+$$
+\hat {\cal H}_{r} \vec{\Psi} = \tau_z E \vec{\Psi}
+$$
+
+with conditon:
+$$
+\vec{\Psi}^\dagger \tau_z \vec{\Psi} =|\psi_1|^2-|\psi_2|^2=1
+$$
+
+this problem can be rewritten in the standard form by introducing the matrix: 
+$$
+\tau_z^{1/2} = 
+	\begin{pmatrix} 	
+		1 &  0 \\
+		0 &  i 
+	\end{pmatrix}
+$$
+which has a property $(\tau_z^{1/2})^2 = \tau_z$ and $\tau_z^{-1/2}=(\tau_z^{1/2})^{-1}=(\tau_z^{1/2})^\dagger$.
+
+Using this matrix we may introduce vector 
+$$
+\vec{\Psi}'=\tau_z^{1/2} \vec{\Psi}
+$$
+so, the equation will change
+$$
+\tau_z^{-1/2} \hat {\cal H}_{r} \tau_z^{-1/2} \vec{\Psi}' = E \vec{\Psi}'
+$$
+so, we may solve standard problem
+$$
+\hat {\cal H'}_{r} = \tau_z^{-1/2} \hat {\cal H}_{r} \tau_z^{-1/2} = \begin{pmatrix} 
+(- i \nabla - \mathbf{A} ) ^ 2 + h_1 (r) &  -i g (r) e^{2 i C \varphi} \\  
+-i g (r) e^{-2 i C \varphi}   & - ( i \nabla - \mathbf{A} ) ^ 2 - h_1 (r) 
+\end{pmatrix}
+$$
+$$
+\hat {\cal H'}_{r} \vec{\Psi}' = E \vec{\Psi}'
+$$
+If we have solved this problem we would get initial vectors by following formulas:
+$$
+\vec{\Psi}_{k} = \tau_z^{-1/2} \vec{\Psi}'_{k}
+$$
+but this $\vec{\Psi}_k$ should be normalized with condition:
+$$
+\hat{\vec{\Psi}}_{k} = \frac{\vec{\Psi}_{k}}{|\vec{\Psi}_{k}^\dagger \tau_z \vec{\Psi}_{k}|}
+$$
+
+The flux density $\cal B$, directed along $\mathbf{e}_z$  is given by   ${\cal B} = r^{-1} d(r A(r))/dr$. 
+We have the flux through the disc $ \Phi = 2\pi \int _{0}^{R_{0}} dr\, r {\cal B} = 4\pi $, i.e. the topological flux.  It 
+is convenient to subtract the constant flux density ${\cal B}_{0} = 4/R_{0}^{2}$ from the total $\cal B$, so that the remainder ${\cal B}_{1} = {\cal B} - {\cal B}_{0}$ is zero on average. 
+It corresponds to division of the vector potential in two parts:
+\begin{equation}
+\begin{aligned}
+\mathbf{A}  & = \left(A_0 + A_1  \right) \mathbf{e}_\phi, \quad A_0 =   \frac 1 2 r {\cal B}_{0} ,    \\
+\quad A_1 & = \frac{1+  \cos\beta } { r } - \sin \beta - \frac 1 2 r {\cal B}_{0}     \\
+\end{aligned}
+\label{}
+\end{equation}
+Notice that by construction $A_{1}(0) = A_{1}(R_{0}) = 0 $.  We find the combinations $(\pm i \nabla - \mathbf{A} ) ^ 2$ in our Hamiltonian, which are now decomposed as
+
+\begin{equation}
+\begin{aligned}
+(\pm i \nabla - \mathbf{A} ) ^ 2 & = (\pm i \nabla - \mathbf{A}_0 ) ^ 2 - 
+2 \mathbf{A}_1  (\pm i \nabla - \mathbf{A}_0 )+ \mathbf{A}_1^2   \\
+\end{aligned}
+\label{}
+\end{equation}
+since $ \mbox{div } \mathbf{A}_1=0$ . 
+
+We regard the part $$
+\hat h (r) =\begin{pmatrix} ( -i \nabla - \mathbf{A}_0 ) ^ 2 & 0 \\ 0 & ( i \nabla - \mathbf{A}_0 ) ^ 2 \end{pmatrix}
+$$
+as the bare Hamiltonian and the rest as a perturbation to it. 
+
+This perturbation includes the potential-like terms, $\mathbf{A}_1^2$, $g(r)$, $u(r)$ and special term 
+$\mathbf{A}_1  (\pm i \nabla - \mathbf{A}_0 )$. Let us consider them separately. 
+
+$$u(r) = h_1 (r) + \mathbf{A}_1^2$$
+
+\subsection{Вывод уравнения Шредингера в матричной форме для диска}
+\noindent Basis functions:
+\begin{equation}
+\begin{aligned}
+\ket{n_r, m} &= \frac{e^{i m \phi}} {\sqrt{2 \pi}} \Upsilon_{m,n_r} (r)
+\end{aligned}
+\end{equation}
+\noindent where  
+\begin{equation}
+\begin{aligned}
+\Upsilon_{m, n_r} (r) & = {\cal B}_{0}^{\frac{1+|m|}{2}} \sqrt{\frac{(|m| + n_r)!}{2^{|m|}n_r!(|m|!)^2}} e^{-\frac{{\cal B}_{0} r^2}{4}} r^{|m|} F\left(-n_r,|m| + 1,\frac{{\cal B}_{0} r^2 }{2} \right) 
+\end{aligned}
+%\label{}
+\end{equation}
+\noindent and $F$  the  hyper geometric function with orthogonality condition $ \int\limits_0^\infty \Upsilon_{m, n_r}^2 (r) r dr = 1$ and $n_r \in \mathbb{Z}_+$, $m \in \mathbb{Z}$.
+
+Let us introduce following indexes $\alpha,\beta = 1, 2$, define functions:
+$$
+\ket{n_r, m, \alpha} = \frac{e^{(-1)^{\alpha+1}  i m \phi}} {\sqrt{2 \pi}} \Upsilon_{m,n_r} (r)
+$$
+and rewrite Schroedinger equation in a following form:
+\begin{equation}
+\mel{m', n'_r, \alpha}{\hat h^{\alpha \beta}(\mathbf{r}) + \hat v^{\alpha \beta}(\mathbf{r}) + \hat u^{\alpha \beta}(\mathbf{r}) + \hat g^{\alpha \beta} (\mathbf{r})) }{n_r,m, \beta} = {\tau_z^{\alpha \beta} \delta_{n_r n'_r} \delta_{m m'} E_{n_r m} }
+\end{equation}
+
+\noindent following definitions used:
+\begin{equation}
+\begin{aligned}
+\hat h^{\alpha \beta}(\mathbf{r})   &= \left( (-1)^\alpha i \nabla - \mathbf{A}_0 \right) ^ 2 \delta_{\alpha \beta} \\
+\hat v^{\alpha \beta}(\mathbf{r})   &= - 2 \mathbf{A}_1 \left( (-1)^{\alpha} i \nabla - \mathbf{A}_0 \right) \delta_{\alpha \beta} \\
+\hat u^{\alpha \beta}(\mathbf{r})   &= u(\mathbf{r})  \delta_{\alpha \beta}\\
+\hat g^{\alpha \beta} (\mathbf{r}) &=   g(\mathbf{r})  e^{ (-1)^{\beta} 2  i   \varphi} \tau^{\alpha \beta}_x 
+\end{aligned}
+\end{equation}
+
+\noindent Let us figure out how matrix elements looks  exactly for each part of Hamiltonian. For this purpose it is useful to introduce the following formulas and facts:
+
+\noindent Jacobi - Anger expansion:
+$$
+e^{i z \cos \theta} \equiv \sum_{n=-\infty}^{\infty} i^n\, J_n(z)\, e^{i n \theta}
+$$
+
+\noindent Any periodic function $f(\mathbf{r}) = f (\mathbf{r} + \mathbf{R})$ %and with central symmetry $f(r) = f(\mathbf{r})$
+may be expand in series $f (\mathbf{r}) = \sum\limits_{\mathbf{k} } e^{i \mathbf{k}  \mathbf{r}} f(\mathbf{k}) $ with
+\begin{equation}
+\begin{aligned}
+f (\mathbf{k}) &= \frac{1} {|\Omega|} \int\limits_\Omega f (  \mathbf{r} ) e^{- i \mathbf{k} \mathbf{r}} d \mathbf{r} \approx \frac{1}{\pi R_0^2}  \int_{r<R_{0}}  f(\mathbf{r})   e^{-i\mathbf{k r}}  d \mathbf{r} , \\
+&   = \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_0 (k r ) f(r) r dr ,    \\
+\end{aligned}
+% \label{}
+\end{equation} 
+with $\quad k = \left|\mathbf{k}\right| $ ,
+$\Omega$ is unit cell, $\mathbf{k}$ wave vector of reciprocal lattice. Also we may check that:
+
+\begin{equation}
+\begin{aligned}
+\mel{m', n'_r, \alpha} {e^{i \mathbf{k}\mathbf{r} + i n \varphi} } {n_r,m, \beta} &= \mel{\Upsilon_{m', n'_r}} {\frac{1}{2 \pi}\int _{0}^{ 2 \pi } e^{i k r \cos{\left( \varphi - \varphi_{\mathbf{k}}  \right)} + i \left((-1)^{\beta+1}m + (-1)^{\alpha} m'  + n \right)  \varphi}    d\varphi} {\Upsilon_{m, n_r}}  \\
+&= \mel{\Upsilon_{m', n'_r}} {\frac{  e^{i \left(-m_{\alpha \beta}  + n \right)  \varphi_{\mathbf{k}}}}{2 \pi}\int _{0}^{ 2 \pi } e^{i k r \cos{\left( \varphi - \varphi_{\mathbf{k}}  \right)} + i \left(-m_{\alpha \beta}  + n \right)  (\varphi-\varphi_{\mathbf{k}}) }    d\varphi} {\Upsilon_{m, n_r}} \\
+&= i^{m_{\alpha \beta} - n} e^{-i (m_{\alpha \beta} - n)  \varphi_{\mathbf{k}}}  \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta} - n } (kr) }{\Upsilon_{m, n_r}}
+\end{aligned}
+\end{equation}
+where $n \in\mathbb{Z}$, $\varphi_{\mathbf{k}}$ is angle of $\mathbf{k}$ in polar coordinates, and $m_{\alpha \beta} = (-1)^{\beta}m + (-1)^{\alpha+1} m' $. 
+
+
+This Fourier coefficients looks like the hardest part of computations: $\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}-n} (kr) }{\Upsilon_{m, n_r}}$
+
+%Helpfully, we may do the following simplification: make substitution $x = e^{-\frac{B r^2}{2}}$ into integral and take integral over x from $0$ to $1$ instead of using integral for all positive $r$.
+
+\subsubsection{Not-perturbated part: $\hat h$}
+
+\begin{equation}
+\mel{n'_r, m', \alpha} {\hat h^{\alpha \beta}(\mathbf{r})} {n_r, m, \beta} = \mel{n'_r, m', \alpha} {\left((-1)^\alpha i \nabla - \mathbf{A}_0 \right) ^ 2 \delta_{\alpha \beta}} {n_r, m, \beta} =  2 {\cal B}_{0} \left( n_r + \frac{|m| - m + 1}{2} \right) \delta_{\alpha \beta} \delta_{n_r n'_r} \delta_{m m'} 
+\end{equation}
+
+
+\subsubsection{Perturbated part: special term $\hat v$}
+\begin{equation}
+\mel{n'_r, m', \alpha} { - 2 \mathbf{A}_1 \left( (-1)^{\alpha} i \nabla - \mathbf{A}_0 \right) \delta_{\alpha \beta}} {n_r, m, \beta}
+\end{equation}
+Let us first rewrite following parts:
+\begin{equation}
+\begin{aligned}
+-2 \mathbf{A}_1  (-i \nabla - \mathbf{A}_0 ) &= \sqrt{2} \left( -i(A_{1}^{x} + i A_{1}^{y})d^{\dagger} + i(A_{1}^{x} - i A_{1}^{y}) d \right)= \sqrt{2} \left( A_{1} (\mathbf{r}) e^{ i \varphi  } d^{\dagger} +  A_{1} (\mathbf{r}) e^{-i \varphi  } d \right), \quad \alpha = 1 \\
+-2 \mathbf{A}_1  (i \nabla - \mathbf{A}_0 ) &=\sqrt{2} \left( -i(A_{1}^{x} + i A_{1}^{y})c + i(A_{1}^{x} - i A_{1}^{y}) c^{\dagger} \right)= \sqrt{2} \left( A_{1} (\mathbf{r}) e^{  i \varphi  } c^{} +  A_{1} (\mathbf{r}) e^{-i \varphi  } c^{\dagger} \right) , \quad \alpha = 2
+\end{aligned}
+\end{equation}
+with 
+\begin{equation}
+\begin{aligned}
+A^{\pm}_{1}  & = A_{1}^{x} \pm i A_{1}^{y} = \pm i A_1 (r) e^{ \pm i \varphi  }    \\
+d  & =  \tfrac{1}{\sqrt{2}} [  \left(\partial_{x} + \tfrac 12 {\cal B} x  \right) + i   \left(  \partial_{y} + \tfrac 12 {\cal B} y\right) ] \\
+d^{\dagger}  & =  \tfrac{1}{\sqrt{2}} [ \left( - \partial_{x} + \tfrac 12 {\cal B} x \right) + i   \left( \partial_{y} - \tfrac 12 {\cal B} y  \right) ] \\
+c  & =  \tfrac{1}{\sqrt{2}} [  \left(\partial_{x} + \tfrac 12 {\cal B} x  \right) - i   \left(  \partial_{y} + \tfrac 12 {\cal B} y\right) ] \\
+c^{\dagger}  & =  \tfrac{1}{\sqrt{2}} [ \left( - \partial_{x} + \tfrac 12 {\cal B} x \right) + i   \left( - \partial_{y} + \tfrac 12 {\cal B} y  \right) ]
+\end{aligned}
+%\label{}
+\end{equation} 
+the operator $c,d$ and $c^{\dagger},d^{\dagger} $ are the lowering and raising operators in Landau level.
+In polar coordinates operators may be written as:
+\begin{equation}
+\begin{aligned}
+d &= \frac{e^{i \varphi}} {\sqrt{2}} \left(  \frac {\partial }{\partial r} + i \frac{1}{r}  \frac {\partial }{\partial \varphi} + \frac 1 2   r \cal B  \right) \\
+d^{\dagger} &= \frac{e^{ -i \varphi}} {\sqrt{2}} \left(  - \frac {\partial }{\partial r} + i \frac{1}{r}  \frac {\partial }{\partial \varphi} + \frac 1 2    r \cal B \right) \\
+c &= \frac{e^{- i \varphi}} {\sqrt{2}} \left(  \frac {\partial }{\partial r} - i \frac{1}{r}  \frac {\partial }{\partial \varphi} + \frac 1 2   r \cal B  \right) \\
+c^{\dagger} &= \frac{e^{ i \varphi}} {\sqrt{2}} \left(  - \frac {\partial }{\partial r} - i \frac{1}{r}  \frac {\partial }{\partial \varphi} + \frac 1 2    r \cal B \right) \\
+\end{aligned}
+\end{equation}
+It is easy to check that:
+
+\begin{equation}
+\begin{aligned}
+d \ket{n_r,m} &= (-1)^{H(m)} \sqrt{ {\cal{B}} \left(n_r + \frac{|m| - m}{2} \right)}  \ket{n_r-H(m), m+1}  \\
+d^{\dagger}  \ket{n_r,m} &= (-1)^{H(m-1)} \sqrt{ {\cal{B}} \left(n_r + 1 + \frac{|m| - m}{2} \right)}  \ket{n_r+H(m-1), m-1}  \\
+c \ket{n_r,m} &= (-1)^{H(-m)} \sqrt{ {\cal{B}} \left(n_r + \frac{|m| + m}{2} \right)}  \ket{n_r-H(-m), m-1}  \\
+c^{\dagger} |n_r,m\rangle &= (-1)^{H(-m-1)} \sqrt{ {\cal{B}} \left( n_r + 1 + \frac{|m| + m}{2}\right)}   \ket{n_r+H(-m-1),m+1 }
+\end{aligned}
+\end{equation}
+
+
+\noindent where assumed that $\psi_{m, n_r} \equiv |n_r,m\rangle$, $H(m)$ is the Heaviside step function defined by following condition:
+$$
+H(n)=\begin{cases} 0, & n < 0, \\ 1, & n \ge 0, \end{cases},
+$$
+\begin{equation}
+\begin{aligned}
+d \ket{0, m'} &= 0 \\
+c \ket{0, -m'} &= 0 \\
+\end{aligned}
+\end{equation}
+\noindent where $m \ge 0$.
+
+Matrix elements have the following form:
+\begin{equation}
+\begin{aligned}
+\mel{n_r',m'} {-2 \mathbf{A}_1  (-i \nabla - \mathbf{A}_0 ) }{m, n_r} &= \sqrt{ {2\cal{B}} } \Big( \bra{m', n_r'} (-1)^{H(m-1)}  \sqrt{n_r + 1 + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{i \varphi}   \ket{n_r+H(m-1), m-1} \\
+&+ \bra{m', n_r'} (-1)^{H(m)} \sqrt{  n_r + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{-i \varphi} \ket{n_r-H(m), m+1} \Big),  \alpha = 1 \\
+\mel{n_r',-m'} {-2 \mathbf{A}_1  (i \nabla - \mathbf{A}_0 ) }{-m, n_r} &= \sqrt{ {2\cal{B}} } \Big(  \bra{-m', n_r'} (-1)^{H(m-1)} \sqrt{  n_r + 1 + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{-i \varphi} \ket{n_r+H(m-1), -m+1} \\
+&+ \bra{-m', n_r'} (-1)^{H(m)}  \sqrt{ n_r + \frac{|m| - m}{2}   }  A_{1} (\mathbf{r}) e^{i \varphi }   \ket{n_r-H(m), -m-1}  \Big), \alpha = 2
+\end{aligned}
+\end{equation}
+
+\noindent or 
+\begin{equation}
+\begin{aligned}
+\mel{n_r',m',\alpha} {-2 \mathbf{A}_1  ((-1)^\alpha i \nabla - \mathbf{A}_0 ) \delta_{\alpha \beta} }{m, n_r,\beta} =\\
+ \delta_{\alpha \beta} \sqrt{ {2\cal{B}} } \Big( 
+\bra{m', n_r',\alpha} (-1)^{H(m-1)}  \sqrt{n_r + 1 + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{ -(-1)^{\alpha} i \varphi}   \ket{n_r+H(m-1), m-1,\beta}  \\
++ \bra{m', n_r',\alpha} (-1)^{H(m)} \sqrt{  n_r + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{(-1)^\alpha i \varphi} \ket{n_r-H(m), m +1 ,\beta}   \Big) \\
+\end{aligned}
+\end{equation}
+
+\noindent Here we may see that: 
+\begin{equation}
+	\begin{aligned}
+ \mel{n_r',m',\alpha} { A_{1} (\mathbf{r}) e^{ (-1)^\beta i \varphi}} {\tilde{n}_r, m +1,\beta} &=  \sum\limits_{\mathbf{k} }  A_{1} (k)  \mel{m', n_r',\alpha} {  e^{i \mathbf{k}\mathbf{r}} e^{ -(-1)^{\beta+1} i \varphi} } {\tilde{n}_r, m +1,\beta} \\
+  &=  \sum\limits_{\mathbf{k} }  A_{1} (k)  \mel{\Upsilon_{m', n'_r}} {\frac{1}{2 \pi}\int _{0}^{ 2 \pi } e^{i k r \cos{\left( \varphi - \varphi_{\mathbf{k}}  \right)} + i \left((-1)^{\beta+1}m + (-1)^{\alpha} m'  \right)  \varphi}   d\varphi} {\Upsilon_{m +1, \tilde{n}_r}} \\
+   &=  i^{m_{\alpha \beta}} \sum\limits_{\mathbf{k} } e^{-im_{\alpha \beta}\varphi_{\mathbf{k}}}   A_{1} (k)  \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (kr)} {\Upsilon_{m +1, \tilde{n}_r}}
+ \end{aligned}
+\end{equation}
+\noindent the similar formula for other part:
+\begin{equation}
+ \mel{n_r',m',\alpha} { A_{1} (\mathbf{r}) e^{ -(-1)^\beta i \varphi}} {\tilde{n}_r, m -1,\beta} =   i^{m_{\alpha \beta}} \sum\limits_{\mathbf{k} } e^{- i m_{\alpha \beta} \varphi_{\mathbf{k}}}   A_{1} (k)  \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (kr)} {\Upsilon_{m -1, \tilde{n}_r}}
+\end{equation}
+\noindent where $ m_{\alpha \beta} = (-1)^{\beta}m + (-1)^{\alpha+1} m' $.
+
+\noindent Then we get the formula:
+\begin{equation}
+\begin{aligned}
+\mel{m', n'_r, \alpha} { - 2 \mathbf{A}_1 \left( (-1)^{\alpha} i \nabla - \mathbf{A}_0 \right) \delta_{\alpha \beta}} {n_r, m, \beta} \\
+= \delta_{\alpha \beta} i^{m_{\alpha \beta} }  \sqrt{ {2\cal{B}} } \sum\limits_{\mathbf{k} }  A_{1} (k) e^{- i m_{\alpha \beta}\varphi_{\mathbf{k}}} \Big(  (-1)^{H(m)} \sqrt{  n_r + \frac{|m| - m}{2}  }   \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (kr)} {\Upsilon_{m +1, n_r-H(m)}}  & \\
+  + (-1)^{H(m-1)} \sqrt{n_r + 1 + \frac{|m| - m}{2}  }   \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (kr)} {\Upsilon_{m-1, n_r+H(m-1)}} 
+\Big)
+\end{aligned}
+\end{equation}
+
+with 
+\begin{equation}
+A_{1} (k) = \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_{0} (k r ) A_1(r) r dr 
+\end{equation} 
+
+
+\subsubsection{Perturbated part: diagonal term $\hat u$}
+\begin{equation}
+\mel{m', n'_r,\alpha} {u(\mathbf{r})  \delta_{\alpha \beta}}{n_r,m, \beta} = i^{m_{\alpha \beta} }  \delta_{\alpha \beta} \sum\limits_{\mathbf{k} }      e^{- i m_{\alpha \beta} \varphi_{\mathbf{k}}} u(\mathbf{k})\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (kr) }{\Upsilon_{m, n_r}}
+\end{equation}
+
+\noindent where $ m_{\alpha \beta} = (-1)^{\beta}m + (-1)^{\alpha+1} m' $
+\begin{equation}
+u (\mathbf{k}) \approx \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_0 (k r ) u(r) r dr 
+\end{equation} 
+and we know function $u$ on the disc:
+\begin{equation}
+u(r) = -\frac{\sin^2 \beta }{2r^2} - \frac{1}{2}\left( \frac{d\beta }{dr} \right)^2 +  \left\{  - \frac{\sin 2\beta }{2r}  - \frac{d\beta }{dr} \right\} + b\cos \beta - \sin ^ 2 \beta + A^2_1(r)
+\end{equation}
+
+\subsubsection{Perturbated part: off-diagonal term $\hat g$}
+
+\begin{equation}
+\mel{m', n'_r, \alpha} {g(\mathbf{r})   e^{ (-1)^{\beta} 2  i   \varphi} \tau^{\alpha \beta}_x} {n_r,m,\beta} =i^{m_{\alpha \beta}} \tau^{\alpha \beta}_x \sum\limits_{\mathbf{k} }      e^{-i m_{\alpha \beta} \varphi_{\mathbf{k}}}  g(\mathbf{k})\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (kr) }{\Upsilon_{m, n_r}}
+\end{equation}
+\noindent where 
+\begin{equation}
+g (\mathbf{k}) \approx \frac{1}{\pi R_0^2}  \int  g(\mathbf{r})   e^{ (-1)^{\beta} 2  i   \varphi} e^{-i \mathbf{k} \mathbf{r}}  d\mathbf{r} = - \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_2 (k r ) g(r) r dr 
+\end{equation} 
+and we know function $g$ on the disc:
+\begin{equation}
+g(r) = \frac{1}{2}\left(  - \frac{\sin ^2\beta }{r^2} + \left( \frac{d\beta }{dr} \right)^2 \right) 
++ \left\{ \frac{d\beta }{dr} - \frac{\sin 2\beta }{2r} \right\}
+\end{equation}
+
+\subsection{ Описание численного метода  }
 
 
 \pagebreak
-\section{Основная часть два: Теория}
-
-\section{Основная часть два: Детали реализации}
-\subsection{Расчётная часть}
-
-\section{Анализ экспериментов.}
+\section{ Анализ основных результатов }
 
 
 \specialsection{Выводы}
