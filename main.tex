@@ -492,7 +492,7 @@ $\mathbf{A}_1  (\pm i \nabla - \mathbf{A}_0 )$ могут быть рассмо�
 \end{aligned}
 \end{equation}
 
-Заметим, что функции $u(\mathbf{r}), g(\mathbf{r}), A_1(\mathbf{r})$ определены только на диске радиуса $R_\text{opt}$ с началом координат.
+Заметим, что функции $u(\mathbf{r}), g(\mathbf{r}), A_1(\mathbf{r})$ определены только на диске радиуса $R_0$ с началом координат, зависимости от $r$ изображены на Рис. \ref{fig:potentials_h}.
 
 Сделаем предположение, что мы продолжили эти функции периодическим образом на гексагональную решетку с вектором $\mathbf{a}_n = n_1 \hat {e}_1 + n_2 \hat {e}_2$ с $n_1,n_2 \in \mathbb{Z}$ и условиями:
 \begin{equation}
@@ -540,17 +540,23 @@ $$
 \begin{equation}
 \label{eq:matrix_elem_k}
 \begin{aligned}
-&\mel{m', n'_r, \alpha} {e^{i \mathbf{Q}_p\mathbf{r} + i n \varphi} } {n_r,m, \beta} = \\ &\mel{\Upsilon_{m', n'_r}} {\frac{1}{2 \pi}\int _{0}^{ 2 \pi } e^{i Q_p r \cos{\left( \varphi - \varphi_{\mathbf{Q}_p}  \right)} + i \left((-1)^{\beta+1}m + (-1)^{\alpha} m'  + n \right)  \varphi}    d\varphi} {\Upsilon_{m, n_r}} =  \\
-& \mel{\Upsilon_{m', n'_r}} {\frac{  e^{i \left(-m_{\alpha \beta}  + n \right)  \varphi_{\mathbf{Q}_p}}}{2 \pi}\int _{0}^{ 2 \pi } e^{i Q_p r \cos{\left( \varphi - \varphi_{\mathbf{Q}_p}  \right)} + i \left(-m_{\alpha \beta}  + n \right)  (\varphi-\varphi_{\mathbf{Q}_p}) }    d\varphi} {\Upsilon_{m, n_r}} =\\
-& i^{m_{\alpha \beta} - n} e^{-i (m_{\alpha \beta} - n)  \varphi_{\mathbf{Q}_p}}  \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta} - n } (Q_p r) }{\Upsilon_{m, n_r}}
+&\mel{m', n'_r, \alpha} {e^{i \mathbf{Q}_p\mathbf{r} + i n \varphi} } {n_r,m, \beta} = \\ &\mel{\Upsilon_{m', n'_r}} {\frac{1}{2 \pi}\int _{0}^{ 2 \pi } e^{i Q_p r \cos{\left( \varphi - \varphi_p  \right)} + i \left((-1)^{\beta+1}m + (-1)^{\alpha} m'  + n \right)  \varphi}    d\varphi} {\Upsilon_{m, n_r}} =  \\
+& \mel{\Upsilon_{m', n'_r}} {\frac{  e^{i \left(-m_{\alpha \beta}  + n \right)  \varphi_p}}{2 \pi}\int _{0}^{ 2 \pi } e^{i Q_p r \cos{\left( \varphi - \varphi_p  \right)} + i \left(-m_{\alpha \beta}  + n \right)  (\varphi-\varphi_p) }    d\varphi} {\Upsilon_{m, n_r}} =\\
+& i^{m_{\alpha \beta} - n} e^{-i (m_{\alpha \beta} - n)  \varphi_p}  \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta} - n } (Q_p r) }{\Upsilon_{m, n_r}}
 \end{aligned}
 \end{equation}
-где $n \in\mathbb{Z}$, $\varphi_{\mathbf{Q}_p}$ - это угол $\mathbf{Q}_p$ в полярных координатах и 
+где $n \in\mathbb{Z}$, $\varphi_p$ - это угол $\mathbf{Q}_p$ в полярных координатах и 
 \begin{equation}
 \label{eq:m_alpha_beta}
 m_{\alpha \beta} = (-1)^{\beta}m + (-1)^{\alpha+1} m'
 \end{equation}
 
+\begin{figure}[t]
+\centering	
+\includegraphics[width=0.9\columnwidth]{images/potentials_h.pdf}
+\caption{Зависимости потенциальных функций \eqref{eq:periodic_potentials} на диске.}
+\label{fig:potentials_h}
+\end{figure}
 
 Выясним точный вид для каждого слагаемого в \eqref{eq:shred_final}. 
 
@@ -562,7 +568,7 @@ m_{\alpha \beta} = (-1)^{\beta}m + (-1)^{\alpha+1} m'
 \end{equation}
 
 
-\subsubsection{Возвмущенная часть: специальное слагаемое $\hat v$}
+\subsubsection{Возмущенная часть: специальное слагаемое $\hat v$}
 Для  $\hat v$ части \eqref{eq:shred_final} удобно воспользоваться следующими соотношениями:
 \begin{equation}
 \begin{aligned}
@@ -587,7 +593,7 @@ d &= \frac{e^{i \varphi}} {\sqrt{2}} \left(  \frac {\partial }{\partial r} + i \
 \begin{equation}
 \begin{aligned}
 &\mel{n_r',m',\alpha} {\hat v^{\alpha \beta}(\mathbf{r}) }{n_r, m,\beta} =
- \delta_{\alpha \beta} \sqrt{ {2\cal{B}_0} } \Big( \\
+ \delta_{\alpha \beta} \sqrt{ {2{\cal{B}}_0} } \Big( \\
 &\bra{n_r',m',\alpha} (-1)^{\Theta(m-1)}  \sqrt{n_r + 1 + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{ -(-1)^{\alpha} i \varphi}   \ket{n_r+\Theta(m-1), m-1,\beta}  \\
 &+ \bra{n_r',m',\alpha} (-1)^{\Theta(m)} \sqrt{  n_r + \frac{|m| - m}{2}  }  A_{1} (\mathbf{r}) e^{(-1)^\alpha i \varphi} \ket{n_r-\Theta(m), m +1 ,\beta}   \Big) \\
 \end{aligned}
@@ -610,40 +616,58 @@ c \ket{0, -m'} &= 0 \\
 
 \noindent окончательная формула принимает следующий вид
 \begin{equation}
+\label{eq:final_v}
 \begin{aligned}
 &\mel{m', n'_r, \alpha} { - 2 \mathbf{A}_1 \left( (-1)^{\alpha} i \nabla - \mathbf{A}_0 \right) \delta_{\alpha \beta}} {n_r, m, \beta} \\
-&= \delta_{\alpha \beta} i^{m_{\alpha \beta} }  \sqrt{ {2\cal{B}_0} } \sum\limits_{p}  A_{1} (Q_p) e^{- i m_{\alpha \beta}\varphi_{\mathbf{Q}_p}} \Big(  \\
-&(-1)^{H(m)} \sqrt{  n_r + \frac{|m| - m}{2}  }   \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r)} {\Upsilon_{m +1, n_r-H(m)}}  \\
-&  + (-1)^{H(m-1)} \sqrt{n_r + 1 + \frac{|m| - m}{2}  }   \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r)} {\Upsilon_{m-1, n_r+H(m-1)}} 
+&= \delta_{\alpha \beta} i^{m_{\alpha \beta} }  \sqrt{ {2{\cal{B}}_0} } \sum\limits_{p}  A_{1} (Q_p) e^{- i m_{\alpha \beta}\varphi_p} \Big(  \\
+&(-1)^{\Theta(m)} \sqrt{  n_r + \frac{|m| - m}{2}  }   \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r)} {\Upsilon_{m +1, n_r-\Theta(m)}}  \\
+&  + (-1)^{\Theta(m-1)} \sqrt{n_r + 1 + \frac{|m| - m}{2}  }   \mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r)} {\Upsilon_{m-1, n_r+\Theta(m-1)}} 
 \Big)
 \end{aligned}
 \end{equation}
 
 При этом коэфциенты $A_{1} (Q_p)$ определяются следующим образом:
 \begin{equation}
-A_{1} (Q_p) = \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_{0} (Q_p r ) A_1(Q_p) r dr 
+A_{1} (Q_p) = \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_{0} (Q_p r ) A_1(r) r dr 
 \end{equation} 
 
-\subsubsection{Возвмущенная часть: диагональное слагаемое $\hat u$}
+Асимптотики $A_1(r)$, как следует из \eqref{eq:asympt_beta} имеют вид
+\begin{equation}
+\begin{aligned}
+A_1(r) &= -\frac{1}{2} r \left|b c_1^2-2 \sqrt{b} c_1-{\cal{B}}_0\right|+O\left(r^3\right), \qquad &r \rightarrow 0 \\
+A_1(r) &= -\frac{{\cal{B}}_0 r}{2}+O\left(\frac{1}{r}\right), \qquad &r \rightarrow \infty
+\end{aligned}
+\end{equation}
+\subsubsection{Возмущенная часть: диагональное слагаемое $\hat u$}
 Для  $\hat v$ части \eqref{eq:shred_final} мы получаем уравнение в общем виде:
 \begin{equation}
-\mel{m', n'_r,\alpha} {u(\mathbf{r})  \delta_{\alpha \beta}}{n_r,m, \beta} = i^{m_{\alpha \beta} }  \delta_{\alpha \beta} \sum\limits_{p}      e^{- i m_{\alpha \beta} \varphi_{\mathbf{Q}_p}} u(\mathbf{Q}_p)\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r) }{\Upsilon_{m, n_r}}
+\label{eq:final_u}
+\mel{m', n'_r,\alpha} {u(\mathbf{r})  \delta_{\alpha \beta}}{n_r,m, \beta} = i^{m_{\alpha \beta} }  \delta_{\alpha \beta} \sum\limits_{p}      e^{- i m_{\alpha \beta} \varphi_p} u(\mathbf{Q}_p)\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r) }{\Upsilon_{m, n_r}}
 \end{equation}
 
 \begin{equation}
 u (\mathbf{Q}_p) \approx \frac{2}{R_0^2}  \int\limits_{0}^{R_0}  J_0 (Q_p r ) u(r) r dr 
 \end{equation} 
-и мы знаем как функция $u$ представлена на диске:
+и мы знаем как функции $u$ представлена на диске:
 \begin{equation}
 u(r) = -\frac{\sin^2 \beta }{2r^2} - \frac{1}{2}\left( \frac{d\beta }{dr} \right)^2 +  \left\{  - \frac{\sin 2\beta }{2r}  - \frac{d\beta }{dr} \right\} + b\cos \beta - \sin ^ 2 \beta + A^2_1(r)
 \end{equation}
-
-\subsubsection{Возвмущенная часть: внедиагональное слагаемое $\hat g$}
-
+с асимтоптиками:
 \begin{equation}
 \begin{aligned}
+u(r) &= \widetilde{c}_0 - \widetilde{c}_1 r^2 + O(r^3), \qquad &r \rightarrow 0 \\
+u(r) &= \frac{1}{4} r^2 {\cal{B}}_0^2 + o(1), \qquad &r \rightarrow \infty
+\end{aligned}
+\end{equation}
+с некоторыми константами $\widetilde{c}_0 > 0$ и $\widetilde{c}_1 > 0$.
+
+\subsubsection{Возмущенная часть: внедиагональное слагаемое $\hat g$}
+
+\begin{equation}
+\label{eq:final_g}
+\begin{aligned}
 &\mel{m', n'_r, \alpha} {g(\mathbf{r})   e^{ (-1)^{\beta} 2  i   \varphi} \tau^{\alpha \beta}_x} {n_r,m,\beta} = \\ 
-&i^{m_{\alpha \beta}} \tau^{\alpha \beta}_x \sum\limits_{p}      e^{-i m_{\alpha \beta} \varphi_{\mathbf{Q}_p}}  g(\mathbf{Q}_p)\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} ( Q_p r) }{\Upsilon_{m, n_r}}
+&i^{m_{\alpha \beta}} \tau^{\alpha \beta}_x \sum\limits_{p}      e^{-i m_{\alpha \beta} \varphi_p}  g(\mathbf{Q}_p)\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} ( Q_p r) }{\Upsilon_{m, n_r}}
 \end{aligned}
 \end{equation}
 \noindent где 
@@ -655,8 +679,22 @@ g (\mathbf{Q}_p) \approx \frac{1}{\pi R_0^2}  \int  g(\mathbf{r})   e^{ (-1)^{\b
 g(r) = \frac{1}{2}\left(  - \frac{\sin ^2\beta }{r^2} + \left( \frac{d\beta }{dr} \right)^2 \right) 
 + \left\{ \frac{d\beta }{dr} - \frac{\sin 2\beta }{2r} \right\}
 \end{equation}
+с асимтоптиками:
+\begin{equation}
+\begin{aligned}
+g(r) &= -\frac{\left|b^2 c_1^4-4 b^{3/2}
+   c_1^3\right|}{6} r^2  +O\left(r^3\right), \qquad &r \rightarrow 0 \\
+g(r) &= -\frac{c_2 b^\frac{1}{4}}{\sqrt{r}} e^{-\sqrt{b} r} + O\left(\frac{e^{-\sqrt{b} r}}{r^\frac{3}{2}}\right), \qquad &r \rightarrow \infty
+\end{aligned}
+\end{equation}
 
-\subsection{ Описание численного метода  }
+
+
+\pagebreak
+\section{ Описание алгоритма численного вычисления спектра и анализ резултатов  }
+
+
+\subsection{ Преобразование обобщенного уравнения на собственные числа в стандартную форму  }
 
 
 Обобщенное уравнение \eqref{eq:init_ham_landau} может быть переписано в стандартной форме, если ввести матрицу
@@ -676,13 +714,15 @@ $$
 $$
 \tau_z^{-1/2} \hat {\cal H}_{r} \tau_z^{-1/2} \vec{\Psi}' = E \vec{\Psi}'
 $$
-мы приходим окончательно к стандартному уравнению на собственные числа:
-$$
+мы приходим к стандартному уравнению на собственные числа:
+\begin{equation}
+\label{eq:std_form_eigen}
 \hat {\cal H'}_{r} = \tau_z^{-1/2} \hat {\cal H}_{r} \tau_z^{-1/2} = \begin{pmatrix} 
 (- i \nabla - \mathbf{A} ) ^ 2 + h_1 (r) &  -i g (r) e^{2 i C \varphi} \\  
 -i g (r) e^{-2 i C \varphi}   & - ( i \nabla - \mathbf{A} ) ^ 2 - h_1 (r) 
 \end{pmatrix}
-$$
+\end{equation}
+
 $$
 \hat {\cal H'}_{r} \vec{\Psi}' = E \vec{\Psi}'
 $$
@@ -690,10 +730,56 @@ $$
 $$
 \vec{\Psi} = \tau_z^{-1/2} \vec{\Psi}'
 $$
+Гораздо удобнее работать с уравнением именно в стандартной форме и диаганализация всегда подразумевается для матрицы построенной именно с использованием формулы \eqref{eq:std_form_eigen}.
 
 
-\pagebreak
-\section{ Анализ основных результатов }
+\subsection{ Суммирование на гексагональной решетке }
+
+Можем заметить, что на гексагональной решетке некоторые центры элементарных ячеек расположены на одинаковом расстоянии от начала координат. Если провести к центрам таких ячеек вектора, то окажется, что число $w$ векторов одинаковой длины всегда будет кратно шести. Предположим, что некоторая функция $f$ обладает симметрией относительно вращений $f(\mathbf{k})=f(k)$, тогда сумма по всем векторам $\mathbf{Q}_p$ гексагональной решетки может быть существенно упрощена:
+\begin{equation}
+\label{eq:sum_qp}
+\begin{aligned}
+&\sum\limits_{p} e^{i m_0\varphi_p}   f(Q_p)  = \sum\limits_{p_0} e^{im_0\varphi_{{p_0}}} f(Q_{p_0})   \sum\limits_{n=0}^{w-1} e^{i m_0 n \frac{2 \pi}{w}} \\
+  &=\sum\limits_{p_0} w e^{i m_0\varphi_{p_0}} f(Q_{p_0}) \left[m_0 = 0 \mod w  \right] 
+\end{aligned}
+\end{equation}
+где подразумевается, что $w$ - это количество равноудаленных от начала координат центров гексагональной решетки с длиной $Q_{p_0}$ и используется скобка Айверсона
+$$
+\left[m_0 = 0 \mod w  \right] =   
+\begin{cases}
+   1 & m_0 = 0 \mod w \\
+   0 & m_0 \neq 0 \mod w 
+ \end{cases}
+$$
+и $\mathbf{Q}_{p_0}$ - это один из $w$ векторов длины $Q_{p_0}$ с наименьшим углом $\varphi_{p_0}$.
+Эта формула используется для вычисления сумм в матричных элементах \eqref{eq:final_g}, \eqref{eq:final_u} и \eqref{eq:final_v}.
+
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $w$  & $Q_{p_0}$, $\pi / \ell$ & $\varphi_{p_0}$\\ 
+ \hline
+ 1&0&0\\
+ 6&1&0\\
+ 6&1.732&1.570796\\
+ 6&2&0\\
+ 12&2.645751&1.380671\\
+ 6&3&0\\
+ 6&3.464102&1.570796\\
+ 12&3.605551&1.289761\\
+ 6&4&0\\
+ 12&4.358899&1.455835\\
+ 12&4.582576&1.237323\\
+ \hline
+\end{tabular}
+\captionof{table}{Пример первых значений $Q_{p_0}$ в единицах $\pi / \ell$ и $\varphi_{p_0}$.} 
+\end{center}
+
+
+\subsection{ Алгоритм вычисления спектра спиновых волн на скирмионном кристалле }
+
+Теперь мы можем явно выписать алгоритм для вычисления спектра и волновых функций в базисе \eqref{eq:basis_func_landau}. Следует заметить, что самой сложной, с вычислительной точки зрения, является часть связанная с получением  значений матричных элементов $\mel{\Upsilon_{m', n'_r}} {J_{m_{\alpha \beta}} (Q_p r) }{\Upsilon_{m, n_r}}$
+
 
 
 \specialsection{Выводы}
